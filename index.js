@@ -19,10 +19,12 @@ app.get('/:sheet', (req, res) => {
   doc.useServiceAccountAuth(creds, err => {
     if (err) res.send(err);
     doc.getRows(1, (err, rows) => {
+      if (rows[0] == undefined) {
+        return res.send("");
+      }
       if (err) res.send(err);
       let keys = Object.keys(rows[0]);
       let useful_keys = keys.slice(4, -2); // discarding the useless keys in response
-
       for (let row of rows) {
         let row_data = {};
         for (let key of useful_keys) {
@@ -31,7 +33,7 @@ app.get('/:sheet', (req, res) => {
         sheet_data.push(row_data);
       }
       let response_data = JSON.stringify(sheet_data);
-      res.json(response_data);
+      return res.json(response_data);
     });
   });
 });
