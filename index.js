@@ -2,7 +2,7 @@ const express = require('express');
 const GoogleSpreadsheet = require('google-spreadsheet');
 const creds = require('./client_secret.json');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
