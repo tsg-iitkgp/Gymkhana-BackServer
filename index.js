@@ -12,6 +12,12 @@ const gc = '1W6vkpYIY0saq7I751Vzjnw0RJyCs9ZfqHAp1Ho3RUd8';
 const openiit = '1XEvab5tQxPhqjYdBa96k4fTxNLYIlvobOXTSbcKabos';
 const mess_menu = '1Wt7KZDasG5X1ElsqpZyRFG32gdqPUOU_qeQuO_u8Oq8';
 
+app.get('/', (req, res) => {
+  return res.json({
+    "message": "backend working!"
+  })
+});
+
 app.get('/:sheet', (req, res) => {
   let sheet_id = eval(req.params.sheet);
   let doc = new GoogleSpreadsheet(sheet_id);
