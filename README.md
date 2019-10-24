@@ -19,3 +19,5 @@ Response is an array of JSONs with key values are headers and values are subsequ
 ## Deployment
 
 The application is deployed on `heroku` with the following link: https://gymk-back.herokuapp.com/
+
+NOTE: AutoDeployment has been enabled to the heroku application from the `master` branch.
