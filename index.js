@@ -1,10 +1,11 @@
 const express = require('express');
 const GoogleSpreadsheet = require('google-spreadsheet');
 const creds = require('./client_secret.json');
-
+const cors = require('cors');
 const PORT = process.env.PORT || 3000;
 
 const app = express();
+app.use(cors());
 
 // Google Sheet IDs for different endpoints
 const events = '1T8U2y4HccE7eqAHpBHcNJfLJ3PKWuFgx8O9PjpH9Iy0';
@@ -14,8 +15,8 @@ const mess_menu = '1Wt7KZDasG5X1ElsqpZyRFG32gdqPUOU_qeQuO_u8Oq8';
 
 app.get('/', (req, res) => {
   return res.json({
-    "message": "backend working!"
-  })
+    message: 'backend working!'
+  });
 });
 
 app.get('/:sheet', (req, res) => {
@@ -26,7 +27,7 @@ app.get('/:sheet', (req, res) => {
     if (err) res.send(err);
     doc.getRows(1, (err, rows) => {
       if (rows[0] == undefined) {
-        return res.send("");
+        return res.send('');
       }
       if (err) res.send(err);
       let keys = Object.keys(rows[0]);
