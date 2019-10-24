@@ -13,7 +13,9 @@ const openiit = '1XEvab5tQxPhqjYdBa96k4fTxNLYIlvobOXTSbcKabos';
 const mess_menu = '1Wt7KZDasG5X1ElsqpZyRFG32gdqPUOU_qeQuO_u8Oq8';
 
 app.get('/:sheet', (req, res) => {
-  let sheet_id = eval(req.params.sheet);
+  let sheet_name = req.params.sheet;
+  sheet_name = sheet_name.slice(0, -5);
+  let sheet_id = eval(sheet_name);
   let doc = new GoogleSpreadsheet(sheet_id);
   let sheet_data = [];
   doc.useServiceAccountAuth(creds, err => {
