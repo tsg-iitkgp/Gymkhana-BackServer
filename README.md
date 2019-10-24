@@ -2,6 +2,15 @@
 
 Server to send data from sheets to the Gymkhana website
 
+## How does this work?
+
+The data is directly taken from google sheets which are associated with the Gymkhana Technology account. The sheets currently are namely:
+
+- GC Results
+- Open IIT Results
+- Notices
+- Mess Menu (Not implemented Yet!)
+
 # Installation and Setup
 To install the dependencies
 
