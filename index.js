@@ -24,12 +24,14 @@ app.get('/:sheet', (req, res) => {
   let doc = new GoogleSpreadsheet(sheet_id);
   let sheet_data = [];
   doc.useServiceAccountAuth(creds, err => {
-    if (err) res.send(err);
-    doc.getRows(1, (err, rows) => {
-      if (rows[0] == undefined) {
-        return res.send('');
-      }
-      if (err) res.send(err);
+    if (err) throw new Error('Unable to connect to docs');
+    const FIRST_SHEET = 1;
+    doc.getRows(FIRST_SHEET, (err, rows) => {
+      if (err) throw new Error('Cannot obtain rows');
+
+      // if there is no data
+      if (rows.length === 0) return res.json({ error: 'no data' });
+
       let keys = Object.keys(rows[0]);
       let useful_keys = keys.slice(4, -2); // discarding the useless keys in response
       for (let row of rows) {
