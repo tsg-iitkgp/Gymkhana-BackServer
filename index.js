@@ -24,11 +24,16 @@ app.get('/:sheet', (req, res) => {
   let doc = new GoogleSpreadsheet(sheet_id);
   let sheet_data = [];
   doc.useServiceAccountAuth(creds, err => {
-    if (err) throw new Error('Unable to connect to docs');
+    if (err) {
+      res.status(500).send('Unable to connect to the database');
+      throw new Error('Unable to connect to database');
+    }
     const FIRST_SHEET = 1;
     doc.getRows(FIRST_SHEET, (err, rows) => {
-      if (err) throw new Error('Cannot obtain rows');
-
+      if (err) {
+        res.statusCode(500).send('Cannot obtain rows');
+        throw new Error('Cannot obtain rows');
+      }
       // if there is no data
       if (rows.length === 0) return res.json({ error: 'no data' });
 
