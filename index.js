@@ -146,8 +146,8 @@ app.get("/:sheet", (req, res) => {
 
     doc.getRows(1, (err, rows) => {
       if (err) {
-        res.statusCode(500).send('Cannot obtain rows');
-        throw new Error('Cannot obtain rows');
+        res.statusCode(500).send('Unable to fetch Data from the database');
+        throw new Error('Unable to fetch Data from the database');
       }
       
       if (rows.length === 0) return res.json({ error: 'no data' });
