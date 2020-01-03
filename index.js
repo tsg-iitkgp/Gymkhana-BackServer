@@ -12,6 +12,7 @@ const events = "1T8U2y4HccE7eqAHpBHcNJfLJ3PKWuFgx8O9PjpH9Iy0";
 const gc = "1W6vkpYIY0saq7I751Vzjnw0RJyCs9ZfqHAp1Ho3RUd8";
 const openiit = "1XEvab5tQxPhqjYdBa96k4fTxNLYIlvobOXTSbcKabos";
 const mess_menu = "1Wt7KZDasG5X1ElsqpZyRFG32gdqPUOU_qeQuO_u8Oq8";
+const rule_book = "1OQylznjwOY4GntvooHW1MLjt_AgGguRoG6rU20xWVic";
 
 app.get("/", (req, res) => {
   return res.json({
@@ -97,9 +98,12 @@ app.get("/mess/:hall", (req, res) => {
 
 app.get("/:sheet", (req, res) => {
   /*
-    Endpoint for events, gc, openiit  
+    Endpoint for events, gc, openiit, rule_book 
     Endpoint URL_PARAMS = '/ONE_OF_THE_ABOVE_THREE'
     
+    In case of Empty Sheet:
+    Response is { "error" : "no data" }
+
     Sample Response for '/events' = [
       {
         "nameoftheevent":"Notice Board Launch",
@@ -129,6 +133,15 @@ app.get("/:sheet", (req, res) => {
         "winner":"SHEET_CELL_VALUE",
         "runnersup":"SHEET_CELL_VALUE",
         "secondrunnersup":"SHEET_CELL_VALUE"
+      }
+    ]
+
+    Sample Response for '/rule_book' = [
+      {
+        "event": "SHEET_CELL_VALUE",
+        "cup": "SHEET_CELL_VALUE",
+        "eventdate": "SHEET_CELL_VALUE",
+        "linktorulebook": "SHEET_CELL_VALUE"
       }
     ]
 
