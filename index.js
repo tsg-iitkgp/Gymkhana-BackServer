@@ -13,7 +13,7 @@ const gc = "1W6vkpYIY0saq7I751Vzjnw0RJyCs9ZfqHAp1Ho3RUd8";
 const openiit = "1XEvab5tQxPhqjYdBa96k4fTxNLYIlvobOXTSbcKabos";
 const mess_menu = "1Wt7KZDasG5X1ElsqpZyRFG32gdqPUOU_qeQuO_u8Oq8";
 const rule_book = "1OQylznjwOY4GntvooHW1MLjt_AgGguRoG6rU20xWVic";
-
+const projects="18B8rEl6UWArnWNOzaY5KIxUEl4yd42gWk3AQvRsJlE0";
 app.get("/", (req, res) => {
   return res.json({
     message: "backend working!"
@@ -98,9 +98,9 @@ app.get("/mess/:hall", (req, res) => {
 
 app.get("/:sheet", (req, res) => {
   /*
-    Endpoint for events, gc, openiit, rule_book 
-    Endpoint URL_PARAMS = '/ONE_OF_THE_ABOVE_THREE'
-    
+    Endpoint for events, gc, openiit, rule_book, projects 
+    Endpoint URL_PARAMS = '/ONE_OF_THE_ABOVE_FOUR'
+
     In case of Empty Sheet:
     Response is { "error" : "no data" }
 
@@ -145,6 +145,15 @@ app.get("/:sheet", (req, res) => {
       }
     ]
 
+    Sample Response for '/projects' = [
+      {
+        "projectname" : "SHEET_CELL_VALUE",
+        "projectbrieflink" : "SHEET_CELL_VALUE",
+        "projectstatus" : "SHEET_CELL_VALUE",
+        "applicationURL" : "SHEET_CELL_VALUE"
+      }
+    ]
+
   */ 
  
   let sheet_id = eval(req.params.sheet);
@@ -159,7 +168,7 @@ app.get("/:sheet", (req, res) => {
 
     doc.getRows(1, (err, rows) => {
       if (err) {
-        res.statusCode(500).send('Unable to fetch Data from the database');
+        res.status(500).send('Unable to fetch Data from the database');
         throw new Error('Unable to fetch Data from the database');
       }
       
